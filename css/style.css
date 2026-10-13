@@ -1,5 +1,12 @@
 
-/* Reset and general styling */
+/*
+ * Energy Bowl Builder
+ * style.css
+ *
+ * Step 11: Dynamic Order Summary Styling
+ */
+
+/* General reset */
 * {
     margin: 0;
     padding: 0;
@@ -26,14 +33,14 @@ header h1 {
     margin-bottom: 8px;
 }
 
-/* Main layout */
+/* Main container */
 main {
     max-width: 850px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* Bowl builder */
+/* Bowl customization section */
 .builder-container {
     background: white;
     padding: 35px;
@@ -63,15 +70,15 @@ main {
     margin-bottom: 10px;
 }
 
-/* Inputs */
+/* Dropdowns and text fields */
 select,
 textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    background-color: white;
     font: inherit;
-    background: white;
 }
 
 select:focus,
@@ -80,7 +87,7 @@ textarea:focus {
     outline-offset: 2px;
 }
 
-/* Checkbox sections */
+/* Checkbox layout */
 fieldset {
     border: none;
     min-width: 0;
@@ -110,27 +117,48 @@ input[type="checkbox"] {
     accent-color: #287a47;
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
 }
 
-/* Order button */
+/* Place Order button */
 .order-btn {
     width: 100%;
     padding: 15px;
-    background: #287a47;
+    background-color: #287a47;
     border: none;
     border-radius: 8px;
     color: white;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .order-btn:hover {
-    background: #1d5c35;
+    background-color: #1d5c35;
 }
 
-/* Order summary */
+.order-btn:focus-visible {
+    outline: 3px solid #14532d;
+    outline-offset: 3px;
+}
+
+/* Form validation messages */
+.validation-errors {
+    background-color: #fff1f0;
+    color: #a61b1b;
+    border: 1px solid #f2b8b5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.validation-errors ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+/* Order summary container */
 .order-summary {
     background: white;
     margin-top: 30px;
@@ -140,29 +168,109 @@ input[type="checkbox"] {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.order-summary[hidden] {
-    display: none;
+/* Ensure hidden sections stay hidden */
+[hidden] {
+    display: none !important;
 }
 
 .order-summary h2 {
     color: #287a47;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* Success confirmation */
+.success-message {
+    background-color: #eaf6ed;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.success-message h3 {
+    color: #287a47;
+    margin-bottom: 5px;
+    font-size: 21px;
+}
+
+.success-message p {
+    color: #41664c;
+}
+
+/* Ingredient summary */
+.summary-content {
+    border: 1px solid #e3e8e4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Individual summary rows */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e3e8e4;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row:nth-child(even) {
+    background-color: #f7faf7;
+}
+
+.summary-label {
+    font-weight: bold;
+    color: #555;
+    flex: 0 0 38%;
+}
+
+.summary-value {
+    color: #333;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Total price */
+.price-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background-color: #eaf6ed;
+    color: #245c38;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.price-section strong {
+    font-size: 26px;
 }
 
 /* Footer */
 footer {
-    background: #287a47;
+    background-color: #287a47;
     color: white;
     text-align: center;
     padding: 20px;
     margin-top: 50px;
 }
 
-/* Responsive design */
+/* Mobile responsiveness */
 @media (max-width: 600px) {
+
     main {
         margin: 20px auto;
         padding: 0 12px;
+    }
+
+    header h1 {
+        font-size: 25px;
     }
 
     .builder-container {
@@ -173,7 +281,24 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    header h1 {
-        font-size: 25px;
+    .order-summary {
+        padding: 20px;
+    }
+
+    .summary-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .summary-label {
+        flex: initial;
+    }
+
+    .summary-value {
+        text-align: left;
+    }
+
+    .price-section strong {
+        font-size: 23px;
     }
 }
