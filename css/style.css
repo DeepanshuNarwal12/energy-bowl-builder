@@ -3,7 +3,7 @@
  * Energy Bowl Builder
  * style.css
  *
- * Step 14: Modern UI Design and Animations
+ * Step 15: Persistent Order History
  */
 
 /* Theme variables */
@@ -17,9 +17,6 @@
     --muted: #647367;
     --border: #dfe9e0;
     --danger: #a61b1b;
-
-    --radius: 14px;
-
     --shadow: 0 8px 30px rgba(24, 75, 42, 0.09);
 }
 
@@ -42,7 +39,6 @@ body {
     min-height: 100vh;
 }
 
-/* Accessibility utility */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -55,7 +51,7 @@ body {
     border: 0;
 }
 
-/* Header and hero section */
+/* Header */
 .site-header {
     background: linear-gradient(
         135deg,
@@ -116,7 +112,7 @@ body {
     font-weight: 600;
 }
 
-/* Main page layout */
+/* Main layout */
 main {
     width: min(900px, 100%);
     margin: -35px auto 50px;
@@ -125,7 +121,7 @@ main {
     z-index: 1;
 }
 
-/* Main builder card */
+/* Customization form */
 .builder-container {
     background: var(--surface);
     border-radius: 20px;
@@ -159,7 +155,7 @@ main {
     font-size: 15px;
 }
 
-/* Individual form sections */
+/* Form sections */
 .form-section {
     padding: 28px 0;
     border-top: 1px solid var(--border);
@@ -197,7 +193,6 @@ main {
     font-size: 13px;
 }
 
-/* Dropdown form layout */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -222,6 +217,7 @@ main {
     color: #c62828;
 }
 
+/* Input styling */
 select,
 textarea {
     display: block;
@@ -232,7 +228,7 @@ textarea {
     font: inherit;
     font-size: 14px;
     color: var(--text);
-    background-color: #ffffff;
+    background: white;
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -267,7 +263,7 @@ textarea:focus {
     font-size: 12px;
 }
 
-/* Ingredient checkbox cards */
+/* Ingredient cards */
 fieldset {
     border: none;
     min-width: 0;
@@ -328,7 +324,7 @@ fieldset {
     line-height: 1;
 }
 
-/* Form submit area */
+/* Place Order button */
 .form-actions {
     padding-top: 20px;
     border-top: 1px solid var(--border);
@@ -370,8 +366,7 @@ fieldset {
     transform: translateY(0);
 }
 
-.order-btn:focus-visible,
-.receipt-btn:focus-visible {
+button:focus-visible {
     outline: 3px solid #80bd96;
     outline-offset: 3px;
 }
@@ -383,7 +378,7 @@ fieldset {
     color: var(--muted);
 }
 
-/* Validation errors */
+/* Validation messages */
 .validation-errors {
     background: #fff1f0;
     color: var(--danger);
@@ -398,12 +393,12 @@ fieldset {
     padding-left: 20px;
 }
 
-/* Hide sections before they are needed */
+/* Visibility */
 [hidden] {
     display: none !important;
 }
 
-/* Order summary section */
+/* Order summary */
 .order-summary {
     background: white;
     margin-top: 30px;
@@ -421,7 +416,6 @@ fieldset {
     font-size: 25px;
 }
 
-/* Successful order notification */
 .success-message {
     background: var(--primary-light);
     padding: 24px;
@@ -440,7 +434,6 @@ fieldset {
     color: #41664c;
 }
 
-/* Order reference and information */
 .order-info {
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -456,7 +449,6 @@ fieldset {
     margin: 25px 0 15px;
 }
 
-/* Order detail and pricing containers */
 .summary-content,
 .price-list {
     border: 1px solid var(--border);
@@ -506,7 +498,6 @@ fieldset {
     font-weight: 700;
 }
 
-/* Total order cost */
 .price-section {
     display: flex;
     justify-content: space-between;
@@ -525,7 +516,7 @@ fieldset {
     font-size: 29px;
 }
 
-/* Download receipt button */
+/* Receipt button */
 .receipt-btn {
     width: 100%;
     padding: 16px;
@@ -548,6 +539,185 @@ fieldset {
     background: var(--primary);
     color: white;
     transform: translateY(-2px);
+}
+
+/* Order history container */
+.history-section {
+    background: white;
+    margin-top: 30px;
+    padding: 35px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.6s ease-out;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.history-header h2 {
+    color: var(--primary-dark);
+    font-size: 25px;
+    margin-top: 6px;
+}
+
+.history-header p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Clear history button */
+.clear-history-btn {
+    border: 1px solid #e4b6b6;
+    border-radius: 9px;
+    background: #fff1f0;
+    color: var(--danger);
+    padding: 11px 15px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.clear-history-btn:hover {
+    background: #ffe0dd;
+}
+
+/* History feedback */
+.history-status {
+    color: var(--primary-dark);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.history-status:empty {
+    display: none;
+}
+
+.history-list {
+    display: grid;
+    gap: 15px;
+}
+
+.history-empty {
+    text-align: center;
+    padding: 30px 15px;
+    background: #f7faf7;
+    border: 1px dashed #cbdccc;
+    border-radius: 12px;
+    color: var(--muted);
+}
+
+/* Individual saved order */
+.history-card {
+    background: #fbfdfb;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.history-card:hover {
+    border-color: #a9d0b5;
+    box-shadow: 0 4px 14px rgba(24, 75, 42, 0.08);
+}
+
+.history-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 17px;
+}
+
+.history-card h3 {
+    color: var(--primary-dark);
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.history-reference,
+.history-date {
+    color: var(--muted);
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.history-reference {
+    margin-top: 5px;
+}
+
+.history-price {
+    color: var(--primary-dark);
+    font-size: 21px;
+    white-space: nowrap;
+}
+
+/* Order history action buttons */
+.history-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.history-btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.history-btn:hover {
+    transform: translateY(-1px);
+}
+
+.view-btn {
+    background: var(--primary-light);
+    border: 1px solid #c6dfce;
+    color: var(--primary-dark);
+}
+
+.view-btn:hover {
+    background: #d6efde;
+}
+
+.history-receipt-btn {
+    background: #f2f5f3;
+    color: #405249;
+    border: 1px solid #d6dfd9;
+}
+
+.history-receipt-btn:hover {
+    background: #e3ebe5;
+}
+
+.delete-btn {
+    background: #fff1f0;
+    color: var(--danger);
+    border: 1px solid #efc3c0;
+}
+
+.delete-btn:hover {
+    background: #ffdedb;
+}
+
+.storage-notice {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 /* Footer */
@@ -586,22 +756,21 @@ fieldset {
     }
 }
 
-/* Tablet layout */
+/* Tablet */
 @media (max-width: 768px) {
+
     .site-header {
         padding: 48px 20px 70px;
     }
 
-    .builder-container {
+    .builder-container,
+    .order-summary,
+    .history-section {
         padding: 28px;
-    }
-
-    .order-summary {
-        padding: 25px;
     }
 }
 
-/* Mobile phone layout */
+/* Mobile */
 @media (max-width: 600px) {
 
     main {
@@ -658,7 +827,8 @@ fieldset {
         min-height: 56px;
     }
 
-    .order-summary {
+    .order-summary,
+    .history-section {
         padding: 20px 16px;
     }
 
@@ -687,9 +857,39 @@ fieldset {
     .success-message h3 {
         font-size: 19px;
     }
+
+    .history-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .history-card {
+        padding: 15px;
+    }
+
+    .history-card-top {
+        gap: 10px;
+    }
+
+    .history-card h3 {
+        font-size: 16px;
+    }
+
+    .history-price {
+        font-size: 18px;
+    }
+
+    .history-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .history-btn {
+        padding: 10px 8px;
+    }
 }
 
-/* Respect reduced-motion preferences */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
     html {

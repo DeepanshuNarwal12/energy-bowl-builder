@@ -8,7 +8,7 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Build your own healthy energy bowl with fresh fruits, toppings, proteins and sweeteners.">
+          content="Build a healthy energy bowl with fresh fruits, toppings and proteins. Save and review your orders.">
 
     <meta name="theme-color" content="#176a42">
 
@@ -19,7 +19,7 @@
 
 <body>
 
-    <!-- Website header and hero section -->
+    <!-- Website header -->
     <header class="site-header">
         <div class="header-content">
 
@@ -30,8 +30,8 @@
             <h1>🥣 Energy Bowl Builder</h1>
 
             <p class="hero-description">
-                Create your perfect bowl, one ingredient
-                at a time. Fresh flavors, endless combinations!
+                Create your perfect bowl, one ingredient at a time.
+                Fresh flavors, endless combinations!
             </p>
 
             <div class="hero-highlights">
@@ -43,9 +43,9 @@
         </div>
     </header>
 
-    <!-- Main application -->
     <main>
 
+        <!-- Energy bowl customization -->
         <section class="builder-container"
                  aria-labelledby="builderHeading">
 
@@ -64,14 +64,14 @@
                 </p>
             </div>
 
-            <!-- Customization Form -->
             <form id="bowlForm">
 
-                <!-- Step 1: Bowl basics -->
+                <!-- Section 1: Base and size -->
                 <div class="form-section">
 
                     <div class="step-heading">
                         <span class="step-number">1</span>
+
                         <div>
                             <h3>Start With the Basics</h3>
                             <p>Pick your base and bowl size.</p>
@@ -86,30 +86,12 @@
                                 <span class="required">*</span>
                             </label>
 
-                            <select id="base"
-                                    name="base"
-                                    required>
-
-                                <option value="">
-                                    Select a base
-                                </option>
-
-                                <option value="Acai Berry">
-                                    Acai Berry
-                                </option>
-
-                                <option value="Greek Yogurt">
-                                    Greek Yogurt
-                                </option>
-
-                                <option value="Oatmeal">
-                                    Oatmeal
-                                </option>
-
-                                <option value="Chia Pudding">
-                                    Chia Pudding
-                                </option>
-
+                            <select id="base" name="base" required>
+                                <option value="">Select a base</option>
+                                <option value="Acai Berry">Acai Berry</option>
+                                <option value="Greek Yogurt">Greek Yogurt</option>
+                                <option value="Oatmeal">Oatmeal</option>
+                                <option value="Chia Pudding">Chia Pudding</option>
                             </select>
                         </div>
 
@@ -119,37 +101,23 @@
                                 <span class="required">*</span>
                             </label>
 
-                            <select id="size"
-                                    name="size"
-                                    required>
-
-                                <option value="">
-                                    Select a size
-                                </option>
-
-                                <option value="Small">
-                                    Small
-                                </option>
-
-                                <option value="Medium">
-                                    Medium
-                                </option>
-
-                                <option value="Large">
-                                    Large
-                                </option>
-
+                            <select id="size" name="size" required>
+                                <option value="">Select a size</option>
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
                             </select>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Step 2: Fruits -->
+                <!-- Section 2: Fruits -->
                 <div class="form-section">
 
                     <div class="step-heading">
                         <span class="step-number">2</span>
+
                         <div>
                             <h3>Add Fresh Fruits</h3>
                             <p>Select at least one fruit.</p>
@@ -207,11 +175,12 @@
                     </fieldset>
                 </div>
 
-                <!-- Step 3: Toppings -->
+                <!-- Section 3: Toppings -->
                 <div class="form-section">
 
                     <div class="step-heading">
                         <span class="step-number">3</span>
+
                         <div>
                             <h3>Choose Your Toppings</h3>
                             <p>Add some crunch and flavor.</p>
@@ -269,11 +238,12 @@
                     </fieldset>
                 </div>
 
-                <!-- Step 4: Extra ingredients -->
+                <!-- Section 4: Optional extras -->
                 <div class="form-section">
 
                     <div class="step-heading">
                         <span class="step-number">4</span>
+
                         <div>
                             <h3>Make It Extra Special</h3>
                             <p>Choose your optional add-ons.</p>
@@ -283,61 +253,36 @@
                     <div class="form-grid">
 
                         <div class="form-group">
-                            <label for="protein">
-                                Protein Add-On
-                            </label>
+                            <label for="protein">Protein Add-On</label>
 
                             <select id="protein" name="protein">
-                                <option value="None">
-                                    No Protein
-                                </option>
-
-                                <option value="Whey Protein">
-                                    Whey Protein
-                                </option>
-
-                                <option value="Plant Protein">
-                                    Plant Protein
-                                </option>
-
-                                <option value="Peanut Butter">
-                                    Peanut Butter
-                                </option>
+                                <option value="None">No Protein</option>
+                                <option value="Whey Protein">Whey Protein</option>
+                                <option value="Plant Protein">Plant Protein</option>
+                                <option value="Peanut Butter">Peanut Butter</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="sweetener">
-                                Choose a Sweetener
-                            </label>
+                            <label for="sweetener">Choose a Sweetener</label>
 
                             <select id="sweetener" name="sweetener">
-                                <option value="None">
-                                    No Sweetener
-                                </option>
-
-                                <option value="Honey">
-                                    Honey
-                                </option>
-
-                                <option value="Maple Syrup">
-                                    Maple Syrup
-                                </option>
-
-                                <option value="Agave Syrup">
-                                    Agave Syrup
-                                </option>
+                                <option value="None">No Sweetener</option>
+                                <option value="Honey">Honey</option>
+                                <option value="Maple Syrup">Maple Syrup</option>
+                                <option value="Agave Syrup">Agave Syrup</option>
                             </select>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Step 5: Instructions -->
+                <!-- Section 5: Special instructions -->
                 <div class="form-section">
 
                     <div class="step-heading">
                         <span class="step-number">5</span>
+
                         <div>
                             <h3>Final Touches</h3>
                             <p>Anything else we should know?</p>
@@ -361,7 +306,7 @@
                     </div>
                 </div>
 
-                <!-- Submit -->
+                <!-- Submit order -->
                 <div class="form-actions">
 
                     <button type="submit" class="order-btn">
@@ -373,24 +318,70 @@
                         Your customized bowl summary will
                         appear below after placing an order.
                     </p>
-
                 </div>
 
             </form>
         </section>
 
-        <!-- Dynamic order confirmation -->
+        <!-- Order confirmation -->
         <section id="orderSummary"
                  class="order-summary"
                  aria-labelledby="summaryHeading"
                  aria-live="polite"
                  hidden>
 
-            <h2 id="summaryHeading">
-                Your Order Summary
-            </h2>
+            <h2 id="summaryHeading">Your Order Summary</h2>
 
             <div id="orderDetails"></div>
+
+        </section>
+
+        <!-- Saved order history -->
+        <section id="orderHistory"
+                 class="history-section"
+                 aria-labelledby="historyHeading">
+
+            <div class="history-header">
+
+                <div>
+                    <span class="section-eyebrow">SAVED ORDERS</span>
+
+                    <h2 id="historyHeading">
+                        Your Order History
+                    </h2>
+
+                    <p>
+                        Review your previous energy bowls.
+                    </p>
+                </div>
+
+                <button type="button"
+                        id="clearHistoryBtn"
+                        class="clear-history-btn"
+                        hidden>
+                    Clear History
+                </button>
+
+            </div>
+
+            <p id="historyStatus"
+               class="history-status"
+               role="status"
+               aria-live="polite"></p>
+
+            <div id="historyList"
+                 class="history-list">
+
+                <p class="history-empty">
+                    No orders saved yet. Build your first bowl!
+                </p>
+
+            </div>
+
+            <p class="storage-notice">
+                Orders are saved only in this browser.
+                No payment or restaurant submission occurs.
+            </p>
 
         </section>
 
@@ -398,14 +389,20 @@
 
     <!-- Footer -->
     <footer class="site-footer">
+
         <p>🥣 Energy Bowl Builder</p>
+
         <p class="footer-note">
             Fresh choices. Delicious combinations.
         </p>
-        <small>&copy; 2026 Energy Bowl Builder</small>
+
+        <small>
+            &copy; 2026 Energy Bowl Builder
+        </small>
+
     </footer>
 
-    <!-- Load JavaScript in dependency order -->
+    <!-- JavaScript dependencies -->
     <script src="js/EnergyBowl.js"></script>
     <script src="js/validation.js"></script>
     <script src="js/app.js"></script>
