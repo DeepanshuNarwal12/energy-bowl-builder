@@ -3,7 +3,7 @@
  * Energy Bowl Builder
  * style.css
  *
- * Step 11: Dynamic Order Summary Styling
+ * Step 12: Enhanced pricing and confirmation design.
  */
 
 /* General reset */
@@ -33,14 +33,14 @@ header h1 {
     margin-bottom: 8px;
 }
 
-/* Main container */
+/* Main layout */
 main {
     max-width: 850px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* Bowl customization section */
+/* Customization form */
 .builder-container {
     background: white;
     padding: 35px;
@@ -54,11 +54,10 @@ main {
 }
 
 .intro {
-    margin-bottom: 25px;
     color: #666;
+    margin-bottom: 25px;
 }
 
-/* Form groups */
 .form-group {
     margin-bottom: 25px;
 }
@@ -70,14 +69,14 @@ main {
     margin-bottom: 10px;
 }
 
-/* Dropdowns and text fields */
+/* Form inputs */
 select,
 textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    background-color: white;
+    background: white;
     font: inherit;
 }
 
@@ -87,7 +86,7 @@ textarea:focus {
     outline-offset: 2px;
 }
 
-/* Checkbox layout */
+/* Ingredient checkboxes */
 fieldset {
     border: none;
     min-width: 0;
@@ -124,18 +123,18 @@ input[type="checkbox"] {
 .order-btn {
     width: 100%;
     padding: 15px;
-    background-color: #287a47;
+    background: #287a47;
     border: none;
     border-radius: 8px;
     color: white;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .order-btn:hover {
-    background-color: #1d5c35;
+    background: #1d5c35;
 }
 
 .order-btn:focus-visible {
@@ -143,22 +142,27 @@ input[type="checkbox"] {
     outline-offset: 3px;
 }
 
-/* Form validation messages */
+/* Validation messages */
 .validation-errors {
-    background-color: #fff1f0;
+    background: #fff1f0;
     color: #a61b1b;
     border: 1px solid #f2b8b5;
-    border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
+    border-radius: 8px;
 }
 
 .validation-errors ul {
-    margin-top: 10px;
+    margin: 10px 0 0;
     padding-left: 20px;
 }
 
-/* Order summary container */
+/* Hidden elements */
+[hidden] {
+    display: none !important;
+}
+
+/* Order confirmation */
 .order-summary {
     background: white;
     margin-top: 30px;
@@ -168,42 +172,56 @@ input[type="checkbox"] {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* Ensure hidden sections stay hidden */
-[hidden] {
-    display: none !important;
-}
-
 .order-summary h2 {
     color: #287a47;
     margin-bottom: 20px;
 }
 
-/* Success confirmation */
+/* Success notification */
 .success-message {
-    background-color: #eaf6ed;
+    background: #eaf6ed;
     border-radius: 10px;
-    padding: 20px;
+    padding: 22px;
     margin-bottom: 25px;
+    text-align: center;
 }
 
 .success-message h3 {
     color: #287a47;
-    margin-bottom: 5px;
-    font-size: 21px;
+    font-size: 22px;
+    margin-bottom: 8px;
 }
 
 .success-message p {
     color: #41664c;
 }
 
-/* Ingredient summary */
-.summary-content {
+/* Order reference and date */
+.order-info {
+    border: 1px solid #e3e8e4;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    background: #fbfdfb;
+}
+
+/* Section headings */
+.section-heading,
+.pricing-breakdown h3 {
+    color: #287a47;
+    font-size: 20px;
+    margin: 25px 0 15px;
+}
+
+/* Selected ingredients */
+.summary-content,
+.price-list {
     border: 1px solid #e3e8e4;
     border-radius: 10px;
     overflow: hidden;
 }
 
-/* Individual summary rows */
+/* Detail rows */
 .summary-row {
     display: flex;
     justify-content: space-between;
@@ -218,55 +236,73 @@ input[type="checkbox"] {
 }
 
 .summary-row:nth-child(even) {
-    background-color: #f7faf7;
+    background: #f7faf7;
 }
 
 .summary-label {
+    flex: 0 0 38%;
     font-weight: bold;
     color: #555;
-    flex: 0 0 38%;
 }
 
 .summary-value {
-    color: #333;
+    flex: 1;
     text-align: right;
+    color: #333;
     overflow-wrap: anywhere;
 }
 
-/* Total price */
+/* Pricing breakdown */
+.pricing-breakdown {
+    margin-top: 25px;
+}
+
+.price-row .summary-label {
+    font-weight: normal;
+}
+
+.price-row .summary-value {
+    font-weight: 600;
+}
+
+/* Total price section */
 .price-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    background-color: #eaf6ed;
+    background: #eaf6ed;
     color: #245c38;
-    padding: 20px;
-    margin-top: 25px;
+    padding: 22px;
     border-radius: 10px;
-    font-size: 19px;
+    margin-top: 25px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .price-section strong {
-    font-size: 26px;
+    font-size: 29px;
 }
 
 /* Footer */
 footer {
-    background-color: #287a47;
+    background: #287a47;
     color: white;
     text-align: center;
     padding: 20px;
     margin-top: 50px;
 }
 
-/* Mobile responsiveness */
+/* Responsive layout */
 @media (max-width: 600px) {
 
     main {
         margin: 20px auto;
         padding: 0 12px;
+    }
+
+    header {
+        padding: 25px 15px;
     }
 
     header h1 {
@@ -298,7 +334,16 @@ footer {
         text-align: left;
     }
 
+    .price-section {
+        padding: 16px;
+        font-size: 17px;
+    }
+
     .price-section strong {
-        font-size: 23px;
+        font-size: 24px;
+    }
+
+    .success-message h3 {
+        font-size: 19px;
     }
 }

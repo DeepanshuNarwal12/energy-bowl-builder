@@ -3,41 +3,39 @@
  * Energy Bowl Builder
  * app.js
  *
- * Handles form input collection, validation,
- * object creation, and order summary rendering.
+ * Handles form submission, validation,
+ * order creation, and confirmation rendering.
  *
- * Step 11: Dynamic Order Summary
+ * Step 12: Enhanced Order Confirmation
  */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Get the required HTML elements
+    // Get the required page elements
     const bowlForm = document.getElementById("bowlForm");
     const orderSummary = document.getElementById("orderSummary");
     const orderDetails = document.getElementById("orderDetails");
 
-    // Verify that required elements exist
     if (!bowlForm || !orderSummary || !orderDetails) {
-        console.error("Required page elements were not found.");
+        console.error("Required HTML elements were not found.");
         return;
     }
 
-    // Create a container for validation messages
+    // Create a container for validation errors
     const errorContainer = document.createElement("div");
 
     errorContainer.id = "validationErrors";
-    errorContainer.setAttribute("role", "alert");
     errorContainer.className = "validation-errors";
+    errorContainer.setAttribute("role", "alert");
     errorContainer.hidden = true;
 
-    // Place the error container before the form
     bowlForm.parentNode.insertBefore(
         errorContainer,
         bowlForm
     );
 
     /*
-     * Collect selected checkbox values.
+     * Collect checked ingredients from a group.
      */
     function getSelectedCheckboxes(groupName) {
 
@@ -53,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Collect customer selections from the form.
+     * Collect customer selections.
      */
     function getFormData() {
 
@@ -78,29 +76,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Display validation errors safely.
+     * Display validation error messages.
      */
     function displayErrors(errors) {
 
         errorContainer.replaceChildren();
 
         const heading = document.createElement("strong");
-
         heading.textContent = "Please correct the following:";
-
-        errorContainer.appendChild(heading);
 
         const errorList = document.createElement("ul");
 
         errors.forEach(function (error) {
 
             const listItem = document.createElement("li");
-
             listItem.textContent = error;
 
             errorList.appendChild(listItem);
         });
 
+        errorContainer.appendChild(heading);
         errorContainer.appendChild(errorList);
 
         errorContainer.hidden = false;
@@ -112,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Clear existing validation errors.
+     * Clear previous validation errors.
      */
     function clearErrors() {
 
@@ -121,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Create the EnergyBowl object.
+     * Create an EnergyBowl instance.
      */
     function createEnergyBowl(orderData) {
 
@@ -137,23 +132,85 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Create one detail row for the order summary.
-     *
-     * textContent prevents customer-provided
-     * instructions from being interpreted as HTML.
+     * Generate a reference for the demo order.
+     * Uses a date and random hexadecimal characters.
      */
-    function createDetailRow(label, value) {
+    function generateOrderReference() {
+
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+
+        let randomPart;
+
+        if (window.crypto && window.crypto.randomUUID) {
+
+            randomPart = window.crypto
+                .randomUUID()
+                .replace(/-/g, "")
+                .slice(0, 8)
+                .toUpperCase();
+
+        } else {
+
+            randomPart = Math.random()
+                .toString(16)
+                .slice(2, 10)
+                .padEnd(8, "0")
+                .toUpperCase();
+        }
+
+        return `EB-${year}${month}${day}-${randomPart}`;
+    }
+
+    /*
+     * Format prices consistently.
+     */
+    function formatPrice(amount) {
+
+        return "$" + amount.toFixed(2);
+    }
+
+    /*
+     * Create a text element safely.
+     */
+    function createTextElement(tag, text, className = "") {
+
+        const element = document.createElement(tag);
+
+        element.textContent = text;
+
+        if (className) {
+            element.className = className;
+        }
+
+        return element;
+    }
+
+    /*
+     * Create a row showing label and value.
+     */
+    function createDetailRow(label, value, className = "") {
 
         const row = document.createElement("div");
-        row.className = "summary-row";
 
-        const labelElement = document.createElement("span");
-        labelElement.className = "summary-label";
-        labelElement.textContent = label;
+        row.className = className
+            ? `summary-row ${className}`
+            : "summary-row";
 
-        const valueElement = document.createElement("span");
-        valueElement.className = "summary-value";
-        valueElement.textContent = value;
+        const labelElement = createTextElement(
+            "span",
+            label,
+            "summary-label"
+        );
+
+        const valueElement = createTextElement(
+            "span",
+            value,
+            "summary-value"
+        );
 
         row.appendChild(labelElement);
         row.appendChild(valueElement);
@@ -162,99 +219,206 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Display the customized order on the webpage.
+     * Display the success message.
      */
-    function displayOrderSummary(customerBowl) {
+    function createSuccessMessage() {
 
-        // Remove any previously displayed order
+        const message = document.createElement("div");
+
+        message.className = "success-message";
+
+        message.appendChild(
+            createTextElement(
+                "h3",
+                "Order Created Successfully!"
+            )
+        );
+
+        message.appendChild(
+            createTextElement(
+                "p",
+                "Your customized energy bowl is ready to review."
+            )
+        );
+
+        return message;
+    }
+
+    /*
+     * Display the order reference and date.
+     */
+    function createOrderInformation(reference, date) {
+
+        const container = document.createElement("div");
+        container.className = "order-info";
+
+        container.appendChild(
+            createDetailRow("Order Reference", reference)
+        );
+
+        container.appendChild(
+            createDetailRow(
+                "Order Date",
+                date.toLocaleString("en-US", {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                })
+            )
+        );
+
+        return container;
+    }
+
+    /*
+     * Create the selected ingredients section.
+     */
+    function createIngredientsSummary(bowl) {
+
+        const container = document.createElement("div");
+        container.className = "summary-content";
+
+        const fruits = bowl.fruits.length
+            ? bowl.fruits.join(", ")
+            : "None";
+
+        const toppings = bowl.toppings.length
+            ? bowl.toppings.join(", ")
+            : "None";
+
+        const instructions = bowl.instructions.trim()
+            ? bowl.instructions
+            : "None";
+
+        const rows = [
+            ["Bowl Size", bowl.size],
+            ["Bowl Base", bowl.base],
+            ["Fruits", fruits],
+            ["Toppings", toppings],
+            ["Protein", bowl.protein],
+            ["Sweetener", bowl.sweetener],
+            ["Special Instructions", instructions]
+        ];
+
+        rows.forEach(function (item) {
+
+            container.appendChild(
+                createDetailRow(item[0], item[1])
+            );
+        });
+
+        return container;
+    }
+
+    /*
+     * Display each price component.
+     */
+    function createPricingBreakdown(bowl) {
+
+        const section = document.createElement("section");
+
+        section.className = "pricing-breakdown";
+
+        section.appendChild(
+            createTextElement("h3", "Price Breakdown")
+        );
+
+        const priceList = document.createElement("div");
+        priceList.className = "price-list";
+
+        const items = bowl.getPriceBreakdown();
+
+        items.forEach(function (item) {
+
+            priceList.appendChild(
+                createDetailRow(
+                    item.label,
+                    formatPrice(item.amount),
+                    "price-row"
+                )
+            );
+        });
+
+        section.appendChild(priceList);
+
+        return section;
+    }
+
+    /*
+     * Display the final total.
+     */
+    function createTotalSection(total) {
+
+        const container = document.createElement("div");
+
+        container.className = "price-section";
+
+        container.appendChild(
+            createTextElement("span", "Total Price")
+        );
+
+        const totalElement = createTextElement(
+            "strong",
+            formatPrice(total)
+        );
+
+        totalElement.id = "totalPrice";
+
+        container.appendChild(totalElement);
+
+        return container;
+    }
+
+    /*
+     * Render the complete order confirmation.
+     */
+    function displayOrderSummary(order) {
+
+        const bowl = order.bowl;
+
+        // Remove the previous order summary
         orderDetails.replaceChildren();
 
-        // Create the success message
-        const successMessage = document.createElement("div");
-        successMessage.className = "success-message";
-
-        const successHeading = document.createElement("h3");
-        successHeading.textContent = "Order Created Successfully!";
-
-        const successText = document.createElement("p");
-        successText.textContent =
-            "Here is your customized energy bowl.";
-
-        successMessage.appendChild(successHeading);
-        successMessage.appendChild(successText);
-
-        orderDetails.appendChild(successMessage);
-
-        // Create a container for the selected ingredients
-        const summaryContent = document.createElement("div");
-        summaryContent.className = "summary-content";
-
-        // Format optional ingredient selections
-        const fruits = customerBowl.fruits.length > 0
-            ? customerBowl.fruits.join(", ")
-            : "None";
-
-        const toppings = customerBowl.toppings.length > 0
-            ? customerBowl.toppings.join(", ")
-            : "None";
-
-        const instructions = customerBowl.instructions.trim()
-            ? customerBowl.instructions
-            : "None";
-
-        // Add the bowl information
-        summaryContent.appendChild(
-            createDetailRow("Bowl Size", customerBowl.size)
+        // Display success message
+        orderDetails.appendChild(
+            createSuccessMessage()
         );
 
-        summaryContent.appendChild(
-            createDetailRow("Bowl Base", customerBowl.base)
+        // Display reference and creation date
+        orderDetails.appendChild(
+            createOrderInformation(
+                order.reference,
+                order.date
+            )
         );
 
-        summaryContent.appendChild(
-            createDetailRow("Fruits", fruits)
+        // Add selected ingredients heading
+        orderDetails.appendChild(
+            createTextElement(
+                "h3",
+                "Your Customized Bowl",
+                "section-heading"
+            )
         );
 
-        summaryContent.appendChild(
-            createDetailRow("Toppings", toppings)
+        // Add selected ingredients
+        orderDetails.appendChild(
+            createIngredientsSummary(bowl)
         );
 
-        summaryContent.appendChild(
-            createDetailRow("Protein", customerBowl.protein)
+        // Add detailed pricing
+        orderDetails.appendChild(
+            createPricingBreakdown(bowl)
         );
 
-        summaryContent.appendChild(
-            createDetailRow("Sweetener", customerBowl.sweetener)
+        // Add total price
+        orderDetails.appendChild(
+            createTotalSection(order.totalPrice)
         );
 
-        summaryContent.appendChild(
-            createDetailRow("Special Instructions", instructions)
-        );
-
-        orderDetails.appendChild(summaryContent);
-
-        // Create a section showing the total price
-        const priceSection = document.createElement("div");
-        priceSection.className = "price-section";
-
-        const priceLabel = document.createElement("span");
-        priceLabel.textContent = "Total Price";
-
-        const priceValue = document.createElement("strong");
-        priceValue.id = "totalPrice";
-
-        priceValue.textContent =
-            "$" + customerBowl.calculatePrice().toFixed(2);
-
-        priceSection.appendChild(priceLabel);
-        priceSection.appendChild(priceValue);
-
-        orderDetails.appendChild(priceSection);
-
-        // Reveal the hidden order summary
+        // Reveal the confirmation
         orderSummary.hidden = false;
 
-        // Automatically scroll to the result
+        // Move the viewport to the confirmation
         orderSummary.scrollIntoView({
             behavior: "smooth",
             block: "start"
@@ -262,29 +426,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-     * Process the customer's order.
+     * Create and process an order.
      */
     function processOrder(orderData) {
 
-        // Create a new EnergyBowl instance
         const customerBowl = createEnergyBowl(orderData);
 
-        // Generate the description using the class method
-        const description = customerBowl.getDescription();
+        const order = {
+            reference: generateOrderReference(),
+            date: new Date(),
+            bowl: customerBowl,
+            description: customerBowl.getDescription(),
+            totalPrice: customerBowl.calculatePrice()
+        };
 
-        // Calculate the total price
-        const totalPrice = customerBowl.calculatePrice();
+        console.log("ENERGY BOWL ORDER");
+        console.log("Reference:", order.reference);
+        console.log("Created Object:", order.bowl);
+        console.log("Description:\n" + order.description);
+        console.log("Total:", formatPrice(order.totalPrice));
 
-        // Display information for debugging
-        console.log("ENERGY BOWL ORDER CONFIRMATION");
-        console.log("Created Object:", customerBowl);
-        console.log("Description:\n" + description);
-        console.log("Total Price: $" + totalPrice.toFixed(2));
+        displayOrderSummary(order);
 
-        // Render the confirmation on the webpage
-        displayOrderSummary(customerBowl);
-
-        return customerBowl;
+        return order;
     }
 
     /*
@@ -292,30 +456,27 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     bowlForm.addEventListener("submit", function (event) {
 
-        // Prevent the page from reloading
         event.preventDefault();
 
-        // Clear previous errors
         clearErrors();
 
-        // Hide a previous confirmation
+        // Hide a previous order confirmation
         orderSummary.hidden = true;
 
-        // Collect all form selections
         const customerOrder = getFormData();
 
-        // Validate the customer's selections
+        // Validate using validation.js
         const validationResult =
             validateBowlOrder(customerOrder);
 
-        // Do not process invalid orders
         if (!validationResult.isValid) {
 
             displayErrors(validationResult.errors);
+
             return;
         }
 
-        // Create and display the customized bowl
+        // Create and display the valid order
         processOrder(customerOrder);
     });
 

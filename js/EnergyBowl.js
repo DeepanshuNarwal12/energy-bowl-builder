@@ -3,19 +3,12 @@
  * Energy Bowl Builder
  * EnergyBowl.js
  *
- * This class represents a customized energy bowl.
- * It stores the customer's ingredient selections,
- * generates an order description, and calculates
- * the total price.
+ * Object-oriented model for customized energy bowls.
+ * Handles ingredients, descriptions, and pricing.
  */
 
 class EnergyBowl {
 
-    /*
-     * Constructor
-     * Initializes an energy bowl with the
-     * customer's selected options.
-     */
     constructor(
         base,
         size,
@@ -25,43 +18,33 @@ class EnergyBowl {
         sweetener,
         instructions
     ) {
-
-        // Store customer selections
         this.base = base;
         this.size = size;
-        this.fruits = fruits;
-        this.toppings = toppings;
+        this.fruits = [...fruits];
+        this.toppings = [...toppings];
         this.protein = protein;
         this.sweetener = sweetener;
         this.instructions = instructions;
-
     }
 
     /*
-     * Method: getDescription()
-     *
-     * Generates a readable description of the
-     * customized bowl.
+     * Generate a readable description of the bowl.
      */
     getDescription() {
 
-        // Format selected fruits
         const fruitList = this.fruits.length > 0
             ? this.fruits.join(", ")
             : "No fruits selected";
 
-        // Format selected toppings
         const toppingList = this.toppings.length > 0
             ? this.toppings.join(", ")
             : "No toppings selected";
 
-        // Handle optional special instructions
         const specialInstructions =
             this.instructions.trim() !== ""
                 ? this.instructions
                 : "None";
 
-        // Generate the complete bowl description
         return `
 Bowl Size: ${this.size}
 Bowl Base: ${this.base}
@@ -71,20 +54,16 @@ Protein: ${this.protein}
 Sweetener: ${this.sweetener}
 Special Instructions: ${specialInstructions}
         `.trim();
-
     }
 
     /*
-     * Method: calculatePrice()
+     * Generate an itemized price breakdown.
      *
-     * Calculates the total cost of the energy bowl
-     * based on selected ingredients and size.
-     *
-     * All prices are in US dollars (USD).
+     * Each item contains a description and amount.
+     * Prices are in US dollars.
      */
-    calculatePrice() {
+    getPriceBreakdown() {
 
-        // Prices for available bowl bases
         const basePrices = {
             "Acai Berry": 6.00,
             "Greek Yogurt": 5.00,
@@ -92,14 +71,12 @@ Special Instructions: ${specialInstructions}
             "Chia Pudding": 5.50
         };
 
-        // Additional prices for bowl sizes
         const sizePrices = {
             "Small": 0.00,
             "Medium": 2.00,
             "Large": 4.00
         };
 
-        // Prices for protein add-ons
         const proteinPrices = {
             "None": 0.00,
             "Whey Protein": 2.00,
@@ -107,7 +84,6 @@ Special Instructions: ${specialInstructions}
             "Peanut Butter": 1.50
         };
 
-        // Prices for sweeteners
         const sweetenerPrices = {
             "None": 0.00,
             "Honey": 0.50,
@@ -115,37 +91,72 @@ Special Instructions: ${specialInstructions}
             "Agave Syrup": 0.75
         };
 
-        // Individual fruit and topping prices
         const fruitPrice = 0.75;
         const toppingPrice = 0.50;
 
-        // Get the selected base price
-        let total = basePrices[this.base];
+        const breakdown = [];
 
-        // Add the bowl size price
-        total += sizePrices[this.size];
+        // Add base price
+        breakdown.push({
+            label: `${this.base} Base`,
+            amount: basePrices[this.base]
+        });
 
-        // Calculate the price of selected fruits
-        const fruitsTotal =
-            this.fruits.length * fruitPrice;
+        // Add size adjustment
+        breakdown.push({
+            label: `${this.size} Size`,
+            amount: sizePrices[this.size]
+        });
 
-        total += fruitsTotal;
+        // Add fruit charges
+        if (this.fruits.length > 0) {
+            breakdown.push({
+                label: `${this.fruits.length} Fruit(s)`,
+                amount: this.fruits.length * fruitPrice
+            });
+        }
 
-        // Calculate the price of selected toppings
-        const toppingsTotal =
-            this.toppings.length * toppingPrice;
+        // Add topping charges
+        if (this.toppings.length > 0) {
+            breakdown.push({
+                label: `${this.toppings.length} Topping(s)`,
+                amount: this.toppings.length * toppingPrice
+            });
+        }
 
-        total += toppingsTotal;
+        // Add protein charge
+        if (this.protein !== "None") {
+            breakdown.push({
+                label: this.protein,
+                amount: proteinPrices[this.protein]
+            });
+        }
 
-        // Add selected protein price
-        total += proteinPrices[this.protein];
+        // Add sweetener charge
+        if (this.sweetener !== "None") {
+            breakdown.push({
+                label: this.sweetener,
+                amount: sweetenerPrices[this.sweetener]
+            });
+        }
 
-        // Add selected sweetener price
-        total += sweetenerPrices[this.sweetener];
-
-        // Round total to two decimal places
-        return Math.round(total * 100) / 100;
-
+        return breakdown;
     }
 
+    /*
+     * Calculate the total from the itemized prices.
+     */
+    calculatePrice() {
+
+        const breakdown = this.getPriceBreakdown();
+
+        const total = breakdown.reduce(
+            function (sum, item) {
+                return sum + item.amount;
+            },
+            0
+        );
+
+        return Math.round(total * 100) / 100;
+    }
 }
