@@ -1,0 +1,40 @@
+
+/* General website styling */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7faf7;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #287a47;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    font-size: 32px;
+}
+
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #287a47;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
