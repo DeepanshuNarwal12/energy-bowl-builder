@@ -3,10 +3,11 @@
  * Energy Bowl Builder
  * app.js
  *
- * Handles form input collection,
- * validation, and customer feedback.
+ * Handles customer interactions with the
+ * energy bowl customization form.
  *
- * Step 9: Form Validation
+ * Step 10:
+ * Connect form submission to the EnergyBowl class.
  */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -14,18 +15,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Get the customization form
     const bowlForm = document.getElementById("bowlForm");
 
-    // Verify the form exists
+    // Verify that the form exists
     if (!bowlForm) {
         console.error("Energy bowl form was not found.");
         return;
     }
 
-    // Create a container for validation messages
+    // Create a container for validation errors
     const errorContainer = document.createElement("div");
 
     errorContainer.id = "validationErrors";
     errorContainer.setAttribute("role", "alert");
 
+    // Style the validation error container
     errorContainer.style.display = "none";
     errorContainer.style.backgroundColor = "#fff1f0";
     errorContainer.style.color = "#a61b1b";
@@ -34,14 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
     errorContainer.style.padding = "15px";
     errorContainer.style.marginBottom = "20px";
 
-    // Place the error container before the form
+    // Insert error messages before the form
     bowlForm.parentNode.insertBefore(
         errorContainer,
         bowlForm
     );
 
     /*
-     * Collect selected checkbox values.
+     * Function: getSelectedCheckboxes()
+     *
+     * Collects all selected checkbox values
+     * from a particular ingredient group.
      */
     function getSelectedCheckboxes(groupName) {
 
@@ -54,31 +59,44 @@ document.addEventListener("DOMContentLoaded", function () {
                 return checkbox.value;
             }
         );
+
     }
 
     /*
-     * Collect all form values.
+     * Function: getFormData()
+     *
+     * Collects all customer selections
+     * from the customization form.
      */
     function getFormData() {
 
+        // Get selected base
         const base = document.getElementById("base").value;
 
+        // Get selected size
         const size = document.getElementById("size").value;
 
+        // Get selected fruits
         const fruits = getSelectedCheckboxes("fruits");
 
+        // Get selected toppings
         const toppings = getSelectedCheckboxes("toppings");
 
-        const protein = document.getElementById("protein").value;
+        // Get selected protein
+        const protein =
+            document.getElementById("protein").value;
 
+        // Get selected sweetener
         const sweetener =
             document.getElementById("sweetener").value;
 
+        // Get special instructions
         const instructions = document
             .getElementById("instructions")
             .value
             .trim();
 
+        // Return all selections as an object
         return {
             base: base,
             size: size,
@@ -88,31 +106,34 @@ document.addEventListener("DOMContentLoaded", function () {
             sweetener: sweetener,
             instructions: instructions
         };
+
     }
 
     /*
-     * Display validation error messages.
+     * Function: displayErrors()
      *
-     * Uses textContent rather than inserting
-     * untrusted values as HTML.
+     * Displays validation error messages.
      */
     function displayErrors(errors) {
 
-        // Clear previous messages
+        // Remove previous error messages
         errorContainer.replaceChildren();
 
-        // Add an error heading
+        // Add heading
         const heading = document.createElement("strong");
-        heading.textContent = "Please correct the following:";
+
+        heading.textContent =
+            "Please correct the following:";
 
         errorContainer.appendChild(heading);
 
-        // Create a list of errors
+        // Create error list
         const errorList = document.createElement("ul");
 
         errorList.style.marginTop = "10px";
         errorList.style.paddingLeft = "20px";
 
+        // Add each error to the list
         errors.forEach(function (error) {
 
             const listItem = document.createElement("li");
@@ -125,45 +146,121 @@ document.addEventListener("DOMContentLoaded", function () {
 
         errorContainer.appendChild(errorList);
 
-        // Make errors visible
+        // Show error messages
         errorContainer.style.display = "block";
 
-        // Scroll to the error messages
+        // Scroll to validation errors
         errorContainer.scrollIntoView({
             behavior: "smooth",
             block: "center"
         });
+
     }
 
     /*
-     * Remove validation messages.
+     * Function: clearErrors()
+     *
+     * Removes previous validation messages.
      */
     function clearErrors() {
 
         errorContainer.replaceChildren();
+
         errorContainer.style.display = "none";
 
     }
 
     /*
-     * Handle form submission.
+     * Function: createEnergyBowl()
+     *
+     * Creates a new EnergyBowl object using
+     * the customer's form selections.
+     */
+    function createEnergyBowl(orderData) {
+
+        const energyBowl = new EnergyBowl(
+            orderData.base,
+            orderData.size,
+            orderData.fruits,
+            orderData.toppings,
+            orderData.protein,
+            orderData.sweetener,
+            orderData.instructions
+        );
+
+        return energyBowl;
+
+    }
+
+    /*
+     * Function: processOrder()
+     *
+     * Creates an EnergyBowl object and
+     * executes its methods.
+     */
+    function processOrder(orderData) {
+
+        // Instantiate a new EnergyBowl object
+        const customerBowl = createEnergyBowl(orderData);
+
+        // Generate the bowl description
+        const bowlDescription =
+            customerBowl.getDescription();
+
+        // Calculate the total bowl price
+        const totalPrice =
+            customerBowl.calculatePrice();
+
+        // Display results in browser console
+        console.log("================================");
+
+        console.log("ENERGY BOWL ORDER CONFIRMATION");
+
+        console.log("================================");
+
+        console.log("EnergyBowl Object:", customerBowl);
+
+        console.log("Bowl Description:");
+
+        console.log(bowlDescription);
+
+        console.log(
+            "Total Price: $" + totalPrice.toFixed(2)
+        );
+
+        console.log("Order processed successfully!");
+
+        // Return the processed order information
+        return {
+            bowl: customerBowl,
+            description: bowlDescription,
+            totalPrice: totalPrice
+        };
+
+    }
+
+    /*
+     * Form Submission Event
+     *
+     * Executes when the customer clicks
+     * the Place Order button.
      */
     bowlForm.addEventListener("submit", function (event) {
 
-        // Prevent page reload
+        // Prevent the page from reloading
         event.preventDefault();
 
-        // Clear previous errors
+        // Clear previous validation errors
         clearErrors();
 
         // Collect customer selections
         const customerOrder = getFormData();
 
-        // Validate customer selections
+        // Validate the order
         const validationResult =
             validateBowlOrder(customerOrder);
 
-        // Stop if the order is invalid
+        // Stop processing if validation fails
         if (!validationResult.isValid) {
 
             displayErrors(validationResult.errors);
@@ -176,13 +273,24 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Form passed all validation checks
-        console.log("Validation successful!");
+        // Confirm successful validation
+        console.log("Form validation successful!");
 
-        console.log("Customer Order:", customerOrder);
+        // Create and process the EnergyBowl object
+        const processedOrder =
+            processOrder(customerOrder);
 
-        // Step 10 will create an EnergyBowl object.
-        // Step 11 will display the order summary.
+        // Confirm that the object was created
+        console.log(
+            "Created EnergyBowl:",
+            processedOrder.bowl instanceof EnergyBowl
+        );
+
+        /*
+         * Step 11:
+         * Display the processed order summary
+         * dynamically on the webpage.
+         */
 
     });
 
