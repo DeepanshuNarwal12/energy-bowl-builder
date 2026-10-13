@@ -3,7 +3,7 @@
  * Energy Bowl Builder
  * style.css
  *
- * Step 12: Enhanced pricing and confirmation design.
+ * Step 13: Order receipt download button
  */
 
 /* General reset */
@@ -20,7 +20,7 @@ body {
     line-height: 1.6;
 }
 
-/* Header */
+/* Website header */
 header {
     background-color: #287a47;
     color: white;
@@ -40,9 +40,9 @@ main {
     padding: 0 20px;
 }
 
-/* Customization form */
+/* Bowl customization form */
 .builder-container {
-    background: white;
+    background-color: white;
     padding: 35px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -69,14 +69,14 @@ main {
     margin-bottom: 10px;
 }
 
-/* Form inputs */
+/* Select and textarea */
 select,
 textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    background: white;
+    background-color: white;
     font: inherit;
 }
 
@@ -86,7 +86,7 @@ textarea:focus {
     outline-offset: 2px;
 }
 
-/* Ingredient checkboxes */
+/* Checkbox layout */
 fieldset {
     border: none;
     min-width: 0;
@@ -102,14 +102,14 @@ fieldset {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #f0f7f1;
+    background-color: #f0f7f1;
     padding: 12px;
     border-radius: 8px;
     cursor: pointer;
 }
 
 .checkbox-group label:hover {
-    background: #dcefe0;
+    background-color: #dcefe0;
 }
 
 input[type="checkbox"] {
@@ -119,32 +119,35 @@ input[type="checkbox"] {
     flex-shrink: 0;
 }
 
-/* Place Order button */
+/* Order submission button */
 .order-btn {
+    display: block;
     width: 100%;
     padding: 15px;
-    background: #287a47;
+    background-color: #287a47;
     border: none;
     border-radius: 8px;
     color: white;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .order-btn:hover {
-    background: #1d5c35;
+    background-color: #1d5c35;
 }
 
-.order-btn:focus-visible {
+/* Keyboard focus */
+.order-btn:focus-visible,
+.receipt-btn:focus-visible {
     outline: 3px solid #14532d;
     outline-offset: 3px;
 }
 
-/* Validation messages */
+/* Form validation */
 .validation-errors {
-    background: #fff1f0;
+    background-color: #fff1f0;
     color: #a61b1b;
     border: 1px solid #f2b8b5;
     padding: 15px;
@@ -157,14 +160,14 @@ input[type="checkbox"] {
     padding-left: 20px;
 }
 
-/* Hidden elements */
+/* Hidden sections */
 [hidden] {
     display: none !important;
 }
 
-/* Order confirmation */
+/* Order summary */
 .order-summary {
-    background: white;
+    background-color: white;
     margin-top: 30px;
     padding: 30px;
     border-radius: 12px;
@@ -177,9 +180,9 @@ input[type="checkbox"] {
     margin-bottom: 20px;
 }
 
-/* Success notification */
+/* Success message */
 .success-message {
-    background: #eaf6ed;
+    background-color: #eaf6ed;
     border-radius: 10px;
     padding: 22px;
     margin-bottom: 25px;
@@ -202,7 +205,7 @@ input[type="checkbox"] {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 25px;
-    background: #fbfdfb;
+    background-color: #fbfdfb;
 }
 
 /* Section headings */
@@ -213,7 +216,7 @@ input[type="checkbox"] {
     margin: 25px 0 15px;
 }
 
-/* Selected ingredients */
+/* Ingredient and price sections */
 .summary-content,
 .price-list {
     border: 1px solid #e3e8e4;
@@ -221,7 +224,7 @@ input[type="checkbox"] {
     overflow: hidden;
 }
 
-/* Detail rows */
+/* Summary rows */
 .summary-row {
     display: flex;
     justify-content: space-between;
@@ -236,7 +239,7 @@ input[type="checkbox"] {
 }
 
 .summary-row:nth-child(even) {
-    background: #f7faf7;
+    background-color: #f7faf7;
 }
 
 .summary-label {
@@ -252,7 +255,7 @@ input[type="checkbox"] {
     overflow-wrap: anywhere;
 }
 
-/* Pricing breakdown */
+/* Price breakdown */
 .pricing-breakdown {
     margin-top: 25px;
 }
@@ -265,13 +268,13 @@ input[type="checkbox"] {
     font-weight: 600;
 }
 
-/* Total price section */
+/* Total price */
 .price-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    background: #eaf6ed;
+    background-color: #eaf6ed;
     color: #245c38;
     padding: 22px;
     border-radius: 10px;
@@ -284,16 +287,44 @@ input[type="checkbox"] {
     font-size: 29px;
 }
 
+/* Download Receipt button */
+.receipt-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    margin-top: 22px;
+    background-color: #287a47;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+}
+
+.receipt-btn:hover {
+    background-color: #1d5c35;
+    transform: translateY(-2px);
+}
+
+.receipt-btn:active {
+    transform: translateY(0);
+}
+
 /* Footer */
 footer {
-    background: #287a47;
+    background-color: #287a47;
     color: white;
     text-align: center;
     padding: 20px;
     margin-top: 50px;
 }
 
-/* Responsive layout */
+/* Mobile responsive design */
 @media (max-width: 600px) {
 
     main {
@@ -345,5 +376,10 @@ footer {
 
     .success-message h3 {
         font-size: 19px;
+    }
+
+    .receipt-btn {
+        padding: 14px;
+        font-size: 16px;
     }
 }
