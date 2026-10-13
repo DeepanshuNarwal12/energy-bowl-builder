@@ -7,194 +7,389 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Energy Bowl Builder</title>
+    <meta name="description"
+          content="Build your own healthy energy bowl with fresh fruits, toppings, proteins and sweeteners.">
+
+    <meta name="theme-color" content="#176a42">
+
+    <title>Energy Bowl Builder | Create Your Perfect Bowl</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- Website Header -->
-    <header>
-        <h1>🥣 Energy Bowl Builder</h1>
-        <p>Fresh ingredients. Your perfect bowl.</p>
-    </header>
+    <!-- Website header and hero section -->
+    <header class="site-header">
+        <div class="header-content">
 
-    <main>
-        <section class="builder-container">
+            <div class="brand-tag">
+                🌿 FRESH • HEALTHY • CUSTOMIZED
+            </div>
 
-            <h2>Build Your Perfect Bowl</h2>
-            <p class="intro">
-                Customize your healthy and delicious energy bowl!
+            <h1>🥣 Energy Bowl Builder</h1>
+
+            <p class="hero-description">
+                Create your perfect bowl, one ingredient
+                at a time. Fresh flavors, endless combinations!
             </p>
 
-            <!-- Bowl Customization Form -->
+            <div class="hero-highlights">
+                <span>✓ Fresh Ingredients</span>
+                <span>✓ Made Your Way</span>
+                <span>✓ Instant Pricing</span>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main application -->
+    <main>
+
+        <section class="builder-container"
+                 aria-labelledby="builderHeading">
+
+            <div class="section-intro">
+                <span class="section-eyebrow">
+                    YOUR BOWL, YOUR WAY
+                </span>
+
+                <h2 id="builderHeading">
+                    Build Your Perfect Bowl
+                </h2>
+
+                <p class="intro">
+                    Choose your favorite ingredients
+                    and create something delicious.
+                </p>
+            </div>
+
+            <!-- Customization Form -->
             <form id="bowlForm">
 
-                <!-- Base Selection -->
-                <div class="form-group">
-                    <label for="base">Choose Your Base</label>
+                <!-- Step 1: Bowl basics -->
+                <div class="form-section">
 
-                    <select id="base" name="base" required>
-                        <option value="">Select a base</option>
-                        <option value="Acai Berry">Acai Berry</option>
-                        <option value="Greek Yogurt">Greek Yogurt</option>
-                        <option value="Oatmeal">Oatmeal</option>
-                        <option value="Chia Pudding">Chia Pudding</option>
-                    </select>
-                </div>
-
-                <!-- Bowl Size -->
-                <div class="form-group">
-                    <label for="size">Choose Your Size</label>
-
-                    <select id="size" name="size" required>
-                        <option value="">Select a size</option>
-                        <option value="Small">Small</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Large">Large</option>
-                    </select>
-                </div>
-
-                <!-- Fruits -->
-                <fieldset class="form-group">
-                    <legend>Choose Your Fruits</legend>
-
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox"
-                                   name="fruits"
-                                   value="Banana">
-                            🍌 Banana
-                        </label>
-
-                        <label>
-                            <input type="checkbox"
-                                   name="fruits"
-                                   value="Strawberry">
-                            🍓 Strawberry
-                        </label>
-
-                        <label>
-                            <input type="checkbox"
-                                   name="fruits"
-                                   value="Blueberry">
-                            🫐 Blueberry
-                        </label>
-
-                        <label>
-                            <input type="checkbox"
-                                   name="fruits"
-                                   value="Mango">
-                            🥭 Mango
-                        </label>
-
-                        <label>
-                            <input type="checkbox"
-                                   name="fruits"
-                                   value="Pineapple">
-                            🍍 Pineapple
-                        </label>
+                    <div class="step-heading">
+                        <span class="step-number">1</span>
+                        <div>
+                            <h3>Start With the Basics</h3>
+                            <p>Pick your base and bowl size.</p>
+                        </div>
                     </div>
-                </fieldset>
 
-                <!-- Toppings -->
-                <fieldset class="form-group">
-                    <legend>Choose Your Toppings</legend>
+                    <div class="form-grid">
 
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox"
-                                   name="toppings"
-                                   value="Granola">
-                            Granola
-                        </label>
+                        <div class="form-group">
+                            <label for="base">
+                                Choose Your Base
+                                <span class="required">*</span>
+                            </label>
 
-                        <label>
-                            <input type="checkbox"
-                                   name="toppings"
-                                   value="Coconut Flakes">
-                            Coconut Flakes
-                        </label>
+                            <select id="base"
+                                    name="base"
+                                    required>
 
-                        <label>
-                            <input type="checkbox"
-                                   name="toppings"
-                                   value="Almonds">
-                            Almonds
-                        </label>
+                                <option value="">
+                                    Select a base
+                                </option>
 
-                        <label>
-                            <input type="checkbox"
-                                   name="toppings"
-                                   value="Chia Seeds">
-                            Chia Seeds
-                        </label>
+                                <option value="Acai Berry">
+                                    Acai Berry
+                                </option>
 
-                        <label>
-                            <input type="checkbox"
-                                   name="toppings"
-                                   value="Chocolate Chips">
-                            Chocolate Chips
-                        </label>
+                                <option value="Greek Yogurt">
+                                    Greek Yogurt
+                                </option>
+
+                                <option value="Oatmeal">
+                                    Oatmeal
+                                </option>
+
+                                <option value="Chia Pudding">
+                                    Chia Pudding
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">
+                                Choose Your Size
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="size"
+                                    name="size"
+                                    required>
+
+                                <option value="">
+                                    Select a size
+                                </option>
+
+                                <option value="Small">
+                                    Small
+                                </option>
+
+                                <option value="Medium">
+                                    Medium
+                                </option>
+
+                                <option value="Large">
+                                    Large
+                                </option>
+
+                            </select>
+                        </div>
+
                     </div>
-                </fieldset>
-
-                <!-- Protein -->
-                <div class="form-group">
-                    <label for="protein">Protein Add-On</label>
-
-                    <select id="protein" name="protein">
-                        <option value="None">No Protein</option>
-                        <option value="Whey Protein">Whey Protein</option>
-                        <option value="Plant Protein">Plant Protein</option>
-                        <option value="Peanut Butter">Peanut Butter</option>
-                    </select>
                 </div>
 
-                <!-- Sweetener -->
-                <div class="form-group">
-                    <label for="sweetener">Choose a Sweetener</label>
+                <!-- Step 2: Fruits -->
+                <div class="form-section">
 
-                    <select id="sweetener" name="sweetener">
-                        <option value="None">No Sweetener</option>
-                        <option value="Honey">Honey</option>
-                        <option value="Maple Syrup">Maple Syrup</option>
-                        <option value="Agave Syrup">Agave Syrup</option>
-                    </select>
+                    <div class="step-heading">
+                        <span class="step-number">2</span>
+                        <div>
+                            <h3>Add Fresh Fruits</h3>
+                            <p>Select at least one fruit.</p>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <legend class="visually-hidden">
+                            Choose Your Fruits
+                        </legend>
+
+                        <div class="checkbox-group">
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="fruits"
+                                       value="Banana">
+                                <span class="ingredient-emoji">🍌</span>
+                                <span>Banana</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="fruits"
+                                       value="Strawberry">
+                                <span class="ingredient-emoji">🍓</span>
+                                <span>Strawberry</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="fruits"
+                                       value="Blueberry">
+                                <span class="ingredient-emoji">🫐</span>
+                                <span>Blueberry</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="fruits"
+                                       value="Mango">
+                                <span class="ingredient-emoji">🥭</span>
+                                <span>Mango</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="fruits"
+                                       value="Pineapple">
+                                <span class="ingredient-emoji">🍍</span>
+                                <span>Pineapple</span>
+                            </label>
+
+                        </div>
+                    </fieldset>
                 </div>
 
-                <!-- Special Instructions -->
-                <div class="form-group">
-                    <label for="instructions">
-                        Special Instructions
-                    </label>
+                <!-- Step 3: Toppings -->
+                <div class="form-section">
 
-                    <textarea
-                        id="instructions"
-                        name="instructions"
-                        rows="4"
-                        maxlength="300"
-                        placeholder="Any special requests?">
-                    </textarea>
+                    <div class="step-heading">
+                        <span class="step-number">3</span>
+                        <div>
+                            <h3>Choose Your Toppings</h3>
+                            <p>Add some crunch and flavor.</p>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <legend class="visually-hidden">
+                            Choose Your Toppings
+                        </legend>
+
+                        <div class="checkbox-group">
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="toppings"
+                                       value="Granola">
+                                <span class="ingredient-emoji">🥣</span>
+                                <span>Granola</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="toppings"
+                                       value="Coconut Flakes">
+                                <span class="ingredient-emoji">🥥</span>
+                                <span>Coconut Flakes</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="toppings"
+                                       value="Almonds">
+                                <span class="ingredient-emoji">🌰</span>
+                                <span>Almonds</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="toppings"
+                                       value="Chia Seeds">
+                                <span class="ingredient-emoji">🌱</span>
+                                <span>Chia Seeds</span>
+                            </label>
+
+                            <label class="ingredient-option">
+                                <input type="checkbox"
+                                       name="toppings"
+                                       value="Chocolate Chips">
+                                <span class="ingredient-emoji">🍫</span>
+                                <span>Chocolate Chips</span>
+                            </label>
+
+                        </div>
+                    </fieldset>
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="order-btn">
-                    Place Order
-                </button>
+                <!-- Step 4: Extra ingredients -->
+                <div class="form-section">
+
+                    <div class="step-heading">
+                        <span class="step-number">4</span>
+                        <div>
+                            <h3>Make It Extra Special</h3>
+                            <p>Choose your optional add-ons.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="protein">
+                                Protein Add-On
+                            </label>
+
+                            <select id="protein" name="protein">
+                                <option value="None">
+                                    No Protein
+                                </option>
+
+                                <option value="Whey Protein">
+                                    Whey Protein
+                                </option>
+
+                                <option value="Plant Protein">
+                                    Plant Protein
+                                </option>
+
+                                <option value="Peanut Butter">
+                                    Peanut Butter
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sweetener">
+                                Choose a Sweetener
+                            </label>
+
+                            <select id="sweetener" name="sweetener">
+                                <option value="None">
+                                    No Sweetener
+                                </option>
+
+                                <option value="Honey">
+                                    Honey
+                                </option>
+
+                                <option value="Maple Syrup">
+                                    Maple Syrup
+                                </option>
+
+                                <option value="Agave Syrup">
+                                    Agave Syrup
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Step 5: Instructions -->
+                <div class="form-section">
+
+                    <div class="step-heading">
+                        <span class="step-number">5</span>
+                        <div>
+                            <h3>Final Touches</h3>
+                            <p>Anything else we should know?</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instructions">
+                            Special Instructions
+                        </label>
+
+                        <textarea id="instructions"
+                                  name="instructions"
+                                  rows="4"
+                                  maxlength="300"
+                                  placeholder="Example: Extra strawberries, please!"></textarea>
+
+                        <small class="field-help">
+                            Optional — maximum 300 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-actions">
+
+                    <button type="submit" class="order-btn">
+                        🥣 Place My Order
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <p class="form-notice">
+                        Your customized bowl summary will
+                        appear below after placing an order.
+                    </p>
+
+                </div>
 
             </form>
         </section>
 
-        <!-- Order Summary -->
-        <section
-            id="orderSummary"
-            class="order-summary"
-            hidden
-            aria-live="polite">
+        <!-- Dynamic order confirmation -->
+        <section id="orderSummary"
+                 class="order-summary"
+                 aria-labelledby="summaryHeading"
+                 aria-live="polite"
+                 hidden>
 
-            <h2>Your Order Summary</h2>
+            <h2 id="summaryHeading">
+                Your Order Summary
+            </h2>
+
             <div id="orderDetails"></div>
 
         </section>
@@ -202,11 +397,15 @@
     </main>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Energy Bowl Builder</p>
+    <footer class="site-footer">
+        <p>🥣 Energy Bowl Builder</p>
+        <p class="footer-note">
+            Fresh choices. Delicious combinations.
+        </p>
+        <small>&copy; 2026 Energy Bowl Builder</small>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Load JavaScript in dependency order -->
     <script src="js/EnergyBowl.js"></script>
     <script src="js/validation.js"></script>
     <script src="js/app.js"></script>

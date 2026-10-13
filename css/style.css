@@ -3,90 +3,271 @@
  * Energy Bowl Builder
  * style.css
  *
- * Step 13: Order receipt download button
+ * Step 14: Modern UI Design and Animations
  */
 
-/* General reset */
+/* Theme variables */
+:root {
+    --primary: #247a49;
+    --primary-dark: #145c36;
+    --primary-light: #e8f5ec;
+    --background: #f5f8f2;
+    --surface: #ffffff;
+    --text: #263b2e;
+    --muted: #647367;
+    --border: #dfe9e0;
+    --danger: #a61b1b;
+
+    --radius: 14px;
+
+    --shadow: 0 8px 30px rgba(24, 75, 42, 0.09);
+}
+
+/* Global reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7faf7;
-    color: #333;
-    line-height: 1.6;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Website header */
-header {
-    background-color: #287a47;
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+}
+
+/* Accessibility utility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Header and hero section */
+.site-header {
+    background: linear-gradient(
+        135deg,
+        #115c36 0%,
+        #247a49 60%,
+        #3d9863 100%
+    );
     color: white;
     text-align: center;
-    padding: 35px 20px;
+    padding: 64px 20px 80px;
 }
 
-header h1 {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-/* Main layout */
-main {
+.header-content {
     max-width: 850px;
-    margin: 40px auto;
+    margin: 0 auto;
+}
+
+.brand-tag {
+    display: inline-block;
+    padding: 7px 15px;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 30px;
+    color: #e3ffe9;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 22px;
+}
+
+.site-header h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.hero-description {
+    max-width: 580px;
+    margin: 0 auto;
+    color: #e4f5e8;
+    font-size: 17px;
+}
+
+.hero-highlights {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.hero-highlights span {
+    padding: 7px 12px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Main page layout */
+main {
+    width: min(900px, 100%);
+    margin: -35px auto 50px;
     padding: 0 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Bowl customization form */
+/* Main builder card */
 .builder-container {
-    background-color: white;
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 42px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    animation: fadeUp 0.55s ease-out;
 }
 
-.builder-container h2 {
-    color: #287a47;
-    margin-bottom: 10px;
+.section-intro {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-eyebrow {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.section-intro h2 {
+    color: var(--primary-dark);
+    font-size: clamp(25px, 3.5vw, 34px);
+    line-height: 1.3;
+    margin: 10px 0;
 }
 
 .intro {
-    color: #666;
-    margin-bottom: 25px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* Individual form sections */
+.form-section {
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+}
+
+.step-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.step-heading h3 {
+    color: var(--primary-dark);
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.step-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Dropdown form layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    min-width: 0;
+    margin-bottom: 12px;
 }
 
 .form-group > label,
 .form-group legend {
     display: block;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 9px;
+    color: var(--text);
 }
 
-/* Select and textarea */
+.required {
+    color: #c62828;
+}
+
 select,
 textarea {
+    display: block;
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: white;
+    border: 1px solid #cbd9ce;
+    border-radius: 10px;
+    padding: 13px 14px;
     font: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background-color: #ffffff;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+select {
+    min-height: 49px;
+    cursor: pointer;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 115px;
+}
+
+select:hover,
+textarea:hover {
+    border-color: var(--primary);
 }
 
 select:focus,
 textarea:focus {
-    outline: 2px solid #287a47;
-    outline-offset: 2px;
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(36, 122, 73, 0.14);
 }
 
-/* Checkbox layout */
+.field-help {
+    display: block;
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* Ingredient checkbox cards */
 fieldset {
     border: none;
     min-width: 0;
@@ -94,65 +275,122 @@ fieldset {
 
 .checkbox-group {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
 }
 
-.checkbox-group label {
+.ingredient-option {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background-color: #f0f7f1;
-    padding: 12px;
-    border-radius: 8px;
+    gap: 11px;
+    min-height: 60px;
+    background: #f4f8f4;
+    padding: 14px;
+    border: 2px solid transparent;
+    border-radius: 12px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.checkbox-group label:hover {
-    background-color: #dcefe0;
+.ingredient-option:hover {
+    background: #ecf6ee;
+    border-color: #bfddc8;
+    transform: translateY(-2px);
 }
 
-input[type="checkbox"] {
-    accent-color: #287a47;
-    width: 18px;
-    height: 18px;
+.ingredient-option:has(input:checked) {
+    background: #e0f3e6;
+    border-color: var(--primary);
+    box-shadow: 0 3px 10px rgba(36, 122, 73, 0.10);
+}
+
+.ingredient-option:has(input:focus-visible) {
+    outline: 3px solid #80bd96;
+    outline-offset: 2px;
+}
+
+.ingredient-option input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    accent-color: var(--primary);
+    cursor: pointer;
     flex-shrink: 0;
 }
 
-/* Order submission button */
+.ingredient-emoji {
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* Form submit area */
+.form-actions {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
 .order-btn {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
     width: 100%;
-    padding: 15px;
-    background-color: #287a47;
+    padding: 17px 22px;
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     color: white;
-    font-size: 18px;
-    font-weight: bold;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 800;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(28, 111, 62, 0.17);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
 }
 
 .order-btn:hover {
-    background-color: #1d5c35;
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(28, 111, 62, 0.22);
+    filter: brightness(1.05);
 }
 
-/* Keyboard focus */
+.order-btn:active {
+    transform: translateY(0);
+}
+
 .order-btn:focus-visible,
 .receipt-btn:focus-visible {
-    outline: 3px solid #14532d;
+    outline: 3px solid #80bd96;
     outline-offset: 3px;
 }
 
-/* Form validation */
+.form-notice {
+    margin-top: 13px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Validation errors */
 .validation-errors {
-    background-color: #fff1f0;
-    color: #a61b1b;
+    background: #fff1f0;
+    color: var(--danger);
     border: 1px solid #f2b8b5;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    padding: 17px;
+    margin-bottom: 23px;
+    border-radius: 10px;
 }
 
 .validation-errors ul {
@@ -160,37 +398,40 @@ input[type="checkbox"] {
     padding-left: 20px;
 }
 
-/* Hidden sections */
+/* Hide sections before they are needed */
 [hidden] {
     display: none !important;
 }
 
-/* Order summary */
+/* Order summary section */
 .order-summary {
-    background-color: white;
+    background: white;
     margin-top: 30px;
-    padding: 30px;
-    border-radius: 12px;
-    border-left: 5px solid #287a47;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 35px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.5s ease-out;
+    scroll-margin-top: 20px;
 }
 
-.order-summary h2 {
-    color: #287a47;
+.order-summary > h2 {
+    color: var(--primary-dark);
     margin-bottom: 20px;
+    font-size: 25px;
 }
 
-/* Success message */
+/* Successful order notification */
 .success-message {
-    background-color: #eaf6ed;
-    border-radius: 10px;
-    padding: 22px;
-    margin-bottom: 25px;
+    background: var(--primary-light);
+    padding: 24px;
+    border-radius: 12px;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .success-message h3 {
-    color: #287a47;
+    color: var(--primary-dark);
     font-size: 22px;
     margin-bottom: 8px;
 }
@@ -199,39 +440,37 @@ input[type="checkbox"] {
     color: #41664c;
 }
 
-/* Order reference and date */
+/* Order reference and information */
 .order-info {
-    border: 1px solid #e3e8e4;
+    border: 1px solid var(--border);
     border-radius: 10px;
-    overflow: hidden;
     margin-bottom: 25px;
-    background-color: #fbfdfb;
+    background: #fbfdfb;
+    overflow: hidden;
 }
 
-/* Section headings */
 .section-heading,
 .pricing-breakdown h3 {
-    color: #287a47;
+    color: var(--primary-dark);
     font-size: 20px;
     margin: 25px 0 15px;
 }
 
-/* Ingredient and price sections */
+/* Order detail and pricing containers */
 .summary-content,
 .price-list {
-    border: 1px solid #e3e8e4;
+    border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
 }
 
-/* Summary rows */
 .summary-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    padding: 14px 16px;
-    border-bottom: 1px solid #e3e8e4;
+    padding: 14px 17px;
+    border-bottom: 1px solid var(--border);
 }
 
 .summary-row:last-child {
@@ -239,117 +478,188 @@ input[type="checkbox"] {
 }
 
 .summary-row:nth-child(even) {
-    background-color: #f7faf7;
+    background: #f7faf7;
 }
 
 .summary-label {
     flex: 0 0 38%;
-    font-weight: bold;
-    color: #555;
+    color: #536258;
+    font-weight: 700;
 }
 
 .summary-value {
     flex: 1;
+    color: var(--text);
     text-align: right;
-    color: #333;
     overflow-wrap: anywhere;
 }
 
-/* Price breakdown */
 .pricing-breakdown {
     margin-top: 25px;
 }
 
 .price-row .summary-label {
-    font-weight: normal;
+    font-weight: 400;
 }
 
 .price-row .summary-value {
-    font-weight: 600;
+    font-weight: 700;
 }
 
-/* Total price */
+/* Total order cost */
 .price-section {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 15px;
-    background-color: #eaf6ed;
-    color: #245c38;
     padding: 22px;
-    border-radius: 10px;
     margin-top: 25px;
-    font-size: 20px;
-    font-weight: bold;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-radius: 12px;
+    font-size: 19px;
+    font-weight: 700;
 }
 
 .price-section strong {
     font-size: 29px;
 }
 
-/* Download Receipt button */
+/* Download receipt button */
 .receipt-btn {
-    display: block;
     width: 100%;
     padding: 16px;
     margin-top: 22px;
-    background-color: #287a47;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 17px;
-    font-weight: bold;
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    background: white;
+    color: var(--primary-dark);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 800;
     cursor: pointer;
     transition:
-        background-color 0.3s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
         transform 0.2s ease;
 }
 
 .receipt-btn:hover {
-    background-color: #1d5c35;
+    background: var(--primary);
+    color: white;
     transform: translateY(-2px);
 }
 
-.receipt-btn:active {
-    transform: translateY(0);
-}
-
 /* Footer */
-footer {
-    background-color: #287a47;
+.site-footer {
+    background: #164e31;
     color: white;
     text-align: center;
-    padding: 20px;
-    margin-top: 50px;
+    padding: 32px 20px;
+    font-size: 16px;
+    font-weight: 700;
 }
 
-/* Mobile responsive design */
-@media (max-width: 600px) {
+.footer-note {
+    color: #d1e8d8;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 6px 0 12px;
+}
 
-    main {
-        margin: 20px auto;
-        padding: 0 12px;
+.site-footer small {
+    color: #bddec8;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* Entrance animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
     }
 
-    header {
-        padding: 25px 15px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    header h1 {
-        font-size: 25px;
+/* Tablet layout */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 48px 20px 70px;
     }
 
     .builder-container {
-        padding: 20px;
+        padding: 28px;
     }
 
+    .order-summary {
+        padding: 25px;
+    }
+}
+
+/* Mobile phone layout */
+@media (max-width: 600px) {
+
+    main {
+        margin-top: -24px;
+        padding: 0 12px;
+    }
+
+    .site-header {
+        padding: 40px 16px 60px;
+    }
+
+    .site-header h1 {
+        font-size: 30px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .hero-highlights {
+        gap: 7px;
+    }
+
+    .hero-highlights span {
+        font-size: 11px;
+        padding: 6px 9px;
+    }
+
+    .builder-container {
+        padding: 21px 17px;
+        border-radius: 16px;
+    }
+
+    .form-grid,
     .checkbox-group {
         grid-template-columns: 1fr;
     }
 
+    .form-section {
+        padding: 24px 0;
+    }
+
+    .step-heading h3 {
+        font-size: 17px;
+    }
+
+    .step-number {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+    }
+
+    .ingredient-option {
+        min-height: 56px;
+    }
+
     .order-summary {
-        padding: 20px;
+        padding: 20px 16px;
     }
 
     .summary-row {
@@ -377,9 +687,19 @@ footer {
     .success-message h3 {
         font-size: 19px;
     }
+}
 
-    .receipt-btn {
-        padding: 14px;
-        font-size: 16px;
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
     }
 }
