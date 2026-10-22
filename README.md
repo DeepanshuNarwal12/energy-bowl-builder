@@ -703,13 +703,6 @@ The demonstration should cover:
 9. GitHub collaboration and commit history.
 10. Live deployment on Vercel.
 
-**Demonstration Video:**  
-
-
-
-
-
----
 
 ## 📚 17. Learning Outcomes
 
